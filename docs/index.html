@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Sequence Braiding</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Libs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+<body style="margin-bottom: 200px">
+
+  <a href="https://github.com/VisDunneRight/sequence_braiding" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: fixed; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="twelve columns" style="margin-top: 25%" id='body-container'>
+        <h1>Sequence Braiding</h1>
+        <p>Temporal event sequence alignment has been used in many domains to visualize nuanced changes and interactions over time.
+		Existing approaches align one or two sentinel events.
+		Overview tasks require examining all alignments of interest using interaction and time or juxtaposition of many visualizations.
+		Furthermore, any event attribute overviews are not closely tied to sequence visualizations.
+		We present Sequence Braiding, a novel overview visualization for temporal event sequences and attributes using a layered directed acyclic network.
+		Sequence Braiding visually aligns many temporal events and attribute groups simultaneously and supports arbitrary ordering, absence, and duplication of events.
+		In a controlled experiment we compare Sequence Braiding and IDMVis on user task completion time, correctness, error, and confidence.
+		Our results provide good evidence that users of Sequence Braiding can understand high-level patterns and trends faster and with similar error.</p>
+
+		<svg id='braids-container1'></svg>
+
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#dataset">Dataset format</a></li>
+      <li><a href="#playground">Playground</a></li>
+      <li><a href="#casestudies">Case studies and examples</a></li>
+      <li><a href="#usage">Usage</a></li>
+    </ul>
+
+    <br><br>
+
+		<h2 id="dataset">Dataset format</h2>
+        Sample dataset for three days:
+
+        <pre><span style="float:right; margin-top: 50px; margin-right: -40px;transform: rotate(45deg); font-size: small; background-color: #333; color: white; width: 200px; text-align: center">Try editing me!</span><code id='dataset-container' contenteditable="true">[
+	[
+		{"type": "Breakfast",	"level": "very_high"},
+		{"type": "Lunch",	"level": "very_high"},
+		{"type": "Snack",	"level": "very_high"},
+		{"type": "Dinner",	"level": "very_high"}
+	],
+	[
+		{"type": "Breakfast",	"level": "very_high"},
+		{"type": "Snack",	"level": "high"},
+		{"type": "Dinner",	"level": "very_high"}
+	],
+	[
+		{"type": "Breakfast",	"level": "high"},
+		{"type": "Lunch",	"level": "very_high"},
+		{"type": "Snack",	"level": "high"},
+		{"type": "Dinner",	"level": "high"}
+	]
+]</code></pre>
+
+        <svg id='braids-container2'></svg>
+
+
+		<h2 id="playground">Playground</h2>
+
+        <svg id='braids-container-sandbox'></svg>
+
+        <form style='font-size: small; text-align: center'>
+        	<div class="row">
+			    <div class="six columns">
+			      <label id="numSequencesliderlabel" for="numSequenceslider">Number of days: 25</label>
+			      <div width='100%'><input type="range" min="10" max="100" value="25" class="slider" id="numSequenceslider" style='width: 90%' onmouseup="numSequenceschanged(this.value)"></div>
+			    </div>
+
+          <div class="six columns">
+  			      <label id="minevsliderlabel" for="minevslider">Minimum events per column: 3</label>
+  			      <div width='100%'><input type="range" min="0" max="10" value="3" class="slider" id="minevslider" style='width: 90%' onmouseup="minevchanged(this.value)"></div>
+  			    </div>
+
+				</div>
+
+
+			  <div class='row'>
+			  	<h5>Colorschemes</h5>
+				<button id='buttoncolorscheme0' type="button" style='font-size: large' onclick="colorschemechanged(0)"></button>
+				<button id='buttoncolorscheme1' type="button" style='font-size: large' onclick="colorschemechanged(1)"></button>
+				<button id='buttoncolorscheme2' type="button" style='font-size: large' onclick="colorschemechanged(2)"></button>
+			  </div>
+
+        <div class='row'>
+			  	<h5>Watch the intersection reduction process</h5>
+          <label class="example-send-yourself-copy">
+            <input id="animatecheckbox" type="checkbox" onclick='sandbox_options.animate = !sandbox_options.animate'>
+            <span>Animate</span>
+          </label>
+			  </div>
+
+			  <div class='row'>
+			  	<div><h5>Sequence alignment parameters</h5>
+            <span style='font-size: small; font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial'> Note: weird parameters may break the visualization. We suggest lowering the minimum threshold of nodes per column to 0 to see the full effect of the change of the parameters. Press the reset button below in case of need.</span>
+            <br><br>
+        </div>
+          <div class='two columns'>
+			  		<label id="matchscoresliderlabel" for="bbb">Match score: 10</label>
+			      	<div width='100%'><input type="range" min="-20" max="20" value="10" class="slider" id="matchscoreslider" style='width: 90%' onmouseup="matchscorechanged(this.value)"></div>
+			  	</div>
+			  	<div class='two columns'>
+			  		<label id="mismatchscoresliderlabel" for="bbb">Mismatch score: -20</label>
+			      	<div width='100%'><input type="range" min="-20" max="20" value="-20" class="slider" id="mismatchscoreslider" style='width: 90%' onmouseup="mismatchscorechanged(this.value)"></div>
+			  	</div>
+			  	<div class='two columns'>
+			  		<label id="begingappenaltysliderlabel" for="bbb">Begin gap penalty: 2</label>
+			      	<div width='100%'><input type="range" min="-20" max="20" value="2" class="slider" id="begingappenaltyslider" style='width: 90%' onmouseup="begingappenaltychanged(this.value)"></div>
+			  	</div>
+			  	<div class='two columns'>
+			  		<label id="gappenaltysliderlabel" for="bbb">Gap penalty: 1</label>
+			      	<div width='100%'><input type="range" min="-20" max="20" value="1" class="slider" id="gappenaltyslider" style='width: 90%' onmouseup="gappenaltychanged(this.value)"></div>
+			  	</div>
+			  	<div class='two columns'>
+			  		<label id="endgappenaltysliderlabel" for="bbb">End gap penalty: 2</label>
+			      	<div width='100%'><input type="range" min="-20" max="20" value="25" class="slider" id="endgappenaltyslider" style='width: 90%' onmouseup="endgappenaltychanged(this.value)"></div>
+			  	</div>
+			  </div>
+        </form>
+
+        <h2 id="casestudies">Case Studies and examples</h2>
+        <img src="images/sbanim.gif" width="50%"><img src="images/sbanimselection.gif" width="50%"><br>
+        <b><a href="https://visdunneright.github.io/sequence_braiding/docs/augmentedsb.html">Augmented Sequence Braiding</a></b>, a plugin to display additional features associated to the sequences.
+
+        <img src="images/chess.png" width="100%"  style="padding: 5%"><br>
+        <b><a href="https://visdunneright.github.io/sequence_braiding/docs/chess.html">Chess</a></b>, a visualization of the sequences of moves played in 200 games of chess.
+
+        <img src="images/movies.png" width="100%"  style="padding: 5%"><br>
+        <b><a href="https://visdunneright.github.io/sequence_braiding/docs/movies.html">How many movies does it take to kill a franchise?</a></b>, a visualization of the IMDb ratings of sequences of movies in the same franchise.
+
+        <br><br>
+
+        <h2 id="usage">Usage</h2>
+
+        Initialize the graph with:
+
+        <pre><code> var graph = new SequenceBraiding(data, "svgname", options)</code></pre>
+
+        <b>data:</b> an array of arrays containing objects. Each object must have a <i>type</i> and a <i>level</i>. See example below. <br>
+        <b>svgname:</b> the id of the svg in which you want to draw the graph.<br>
+        <b>options:</b> an object containing the parameters for drawing the graph.
+
+        <br><br>
+
+        <h4>Options</h4>
+
+        The options object is a javascript object that allows you to customize Sequence Braiding in terms of visual representation or to give parameters to the algorithm. <br><br>
+
+        Example:
+
+        <pre><code> graph_options = {
+          numSequences: 10,
+          minEventPerColThreshold: 1,
+          height: 1000,
+          width: window.innerWidth*0.7,
+          forceLevelName: true,
+          node_width_factor: 0.08,
+          levels: ['very_high', 'high', 'normal', 'low', 'very_low'],
+        }</code></pre>
+
+        The following section contains an explanation of every parameter that can be customized through the options object.
+
+        <br><br>
+
+        <h5>Features</h5>
+        <b>guidelines:</b> draws faint lines between a level and the other to help distinguish them.<br>
+        Default: true<br>
+        <b>animate:</b> activates or deactivates animations in the graph, which show how the nodes are moved at each iteration of the intersection reduction algorithm.<br>
+        Default: false<br>
+        <b>colorbysequence:</b> if set to true, each sequence line will have a specific color, and the colors won't change according to the node level, but will be the same color throughout the full sequence.<br>
+        Default: false<br>
+        <b>forceLevelName:</b> forces the level name to be displayed even with a high number of lines.<br>
+        Default: false<br>
+        <br>
+        <h5>Data parameters</h5>
+		    <b>numSequences:</b> determines the maximum amount of sequences to display.<br>
+        Default: 10<br>
+        <b>minEventPerColThreshold:</b> columns that contain a number of events under this threshold will be filtered out.<br>
+        Default: 1<br>
+        <br>
+        <h5>Algorithm parameters</h5>
+        <b>max_iterations:</b> maximum number of iterations to be run by the intersection reduction algorithm.<br>
+        Default: 20<br>
+        <b>path:</b> can be used to force the order of events. If left undefined, the algorithm will guess it while also trying to reduce the intersections as much as possible.<br>
+        Example: path: ["source", "breakfast", "lunch", "sink"]<br>
+        Default: undefined<br>
+        <b>levels:</b> can be used to force the order of levels. Especially useful when the levels have a sequential ordering. If left undefined, the algorithm will try to guess it.<br>
+        Default: undefined<br>
+        <br>
+        <h5>Pairwise alignment parameters</h5>
+        Pairwise alignment parameters are used to generate the minimum supersequence of event types. If <b>path</b> is not forced, Sequence Braiding will use these parameters to generate a supersequence using pairwise DNA alignment.
+        Depending on the needs of the specific user, these parameters can be changed. <b>pairwise_alignment_vars</b> must be given as an input as a subfield of the options object. <br>
+<pre><code>options = {
+  pairwise_alignment_vars: {
+    MATCH_SCORE: 100,
+    MISMATCH_SCORE: -10,
+    BEGIN_GAP_PENALTY: 2,
+    GAP_PENALTY: 1,
+    END_GAP_PENALTY: 2,
+  },
+  //...
+}</code></pre>
+
+        <h5>Graphical presentation</h5>
+				<b>height:</b> height of the visualization.<br>
+        Default: 400 <br>
+		    <b>width:</b> width of the visualization.<br>
+        Default: '100%' <br>
+				<b>svg_width:</b> width of the svg.<br>
+        Default: '100%' <br>
+				<b>link_opacity:</b> opacity of the lines.<br>
+        Default: 1 <br>
+				<b>node_width_factor:</b> size of the nodes.<br>
+        Default: 0.2 <br>
+				<b>link_stroke_width:</b> size of the lines.<br>
+        Default: 4 <br>
+				<b>padding:</b> takes an object that describes the top and the left padding of the visualization - not of the text.<br>
+        Default: {top: 40, left: 40} <br>
+				<b>colorscheme:</b> takes an array of strings of hex values of colors. Colors used for the visualization.<br>
+        Default: ["#E32551", "#F07C19", "#029DAF", "#FFC219", "#cd5b43"] <br>
+				<b>fontSize:</b> size of the fonts used in the graph. <br>
+        Default: '0.9em' <br>
+				<b>catmullromvalue:</b> how smooth the curves appear. Closer to 0 will produce more rough curves, but will be more readable on more cluttered visualizations. Closer to 1 will produce softer curves.<br>
+        Default: 1 <br>
+				<b>path_text_y:</b> the vertical position of the text containing the event types (at the top of each column). <br>
+        Default: 10 <br>
+        <br>
+        <div style="text-align:center; padding-top: 100px"><img src="images/lablogoblack.png" width="30%"></div>
+      </div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+<script src='../lib/align_pair_quad.js'></script>
+<script src='../lib/pairwise_alignment_dna.js'></script>
+<script src='../js/util.js'></script>
+<script src='../js/SequenceBraiding.js'></script>
+
+<script>
+
+	graph1_options = {
+		numSequences: 10,
+		levels: ['very_high', 'high', 'normal', 'low', 'very_low']
+	}
+
+	sandbox_options = {
+		numSequences: 25,
+		animate: true,
+		levels: ['very_high', 'high', 'normal', 'low', 'very_low'],
+    minEventPerColThreshold: 3,
+	}
+
+	d3.json('../data/sandboxdata.json', (error, data) => {
+		sandbox_data = data
+
+		graph1 = new SequenceBraiding(sandbox_data, 'braids-container1', graph1_options)
+        graph_sandbox = new SequenceBraiding(sandbox_data, 'braids-container-sandbox', sandbox_options)
+    })
+
+	document.getElementById("numSequenceslider").value = 25
+  document.getElementById("minevslider").value = 3
+	document.getElementById("matchscoreslider").value = 10
+	document.getElementById("mismatchscoreslider").value = -20
+	document.getElementById("begingappenaltyslider").value = 2
+	document.getElementById("gappenaltyslider").value = 1
+	document.getElementById("endgappenaltyslider").value = 2
+
+	document.getElementById('animatecheckbox').checked = true
+
+	colorschemes = [
+		["#E32551", "#F07C19", "#029DAF", "#FFC219", "#cd5b43"],
+		["#C44D58", "#FF6B6B", "#C7F464", "#4ECDC4", "#556270"],
+		["#B05574", "#F87E7B", "#FAB87F", "#DCD1B4", "#5E9FA3"]
+	]
+
+	for (var j in colorschemes){
+		document.getElementById('buttoncolorscheme'+j).innerHTML = ''
+		for (var i in colorschemes[j])
+			document.getElementById('buttoncolorscheme'+j).innerHTML += '<span style="color:'+colorschemes[j][i]+'">●</span>'
+	}
+
+	function numSequenceschanged(val){
+		document.getElementById('braids-container-sandbox').innerHTML = ''
+		document.getElementById("numSequencesliderlabel").innerHTML = 'Number of days: ' + val
+		sandbox_options.numSequences = val
+		graph_sandbox = new SequenceBraiding(sandbox_data, 'braids-container-sandbox', sandbox_options)
+	}
+
+  function minevchanged(val){
+    document.getElementById('braids-container-sandbox').innerHTML = ''
+    document.getElementById("minevsliderlabel").innerHTML = 'Minimum events per column: ' + val
+    sandbox_options.minEventPerColThreshold = val
+    graph_sandbox = new SequenceBraiding(sandbox_data, 'braids-container-sandbox', sandbox_options)
+  }
+
+	function colorschemechanged(val){
+		document.getElementById('braids-container-sandbox').innerHTML = ''
+		sandbox_options.colorscheme = colorschemes[val]
+		graph_sandbox = new SequenceBraiding(sandbox_data, 'braids-container-sandbox', sandbox_options)
+	}
+
+	function matchscorechanged(val){
+		sandbox_options.MATCH_SCORE = val
+		document.getElementById("matchscoresliderlabel").innerHTML = 'Match score: ' + val
+		document.getElementById('braids-container-sandbox').innerHTML = ''
+		graph_sandbox = new SequenceBraiding(sandbox_data, 'braids-container-sandbox', sandbox_options)
+	}
+
+	function mismatchscorechanged(val){
+		sandbox_options.MISMATCH_SCORE = val
+		document.getElementById("mismatchscoresliderlabel").innerHTML = 'Mismatch score: ' + val
+		document.getElementById('braids-container-sandbox').innerHTML = ''
+		graph_sandbox = new SequenceBraiding(sandbox_data, 'braids-container-sandbox', sandbox_options)
+	}
+
+	function begingappenaltychanged(val){
+		sandbox_options.BEGIN_GAP_PENALTY = val
+		document.getElementById("begingappenaltysliderlabel").innerHTML = 'Begin gap penalty: ' + val
+		document.getElementById('braids-container-sandbox').innerHTML = ''
+		graph_sandbox = new SequenceBraiding(sandbox_data, 'braids-container-sandbox', sandbox_options)
+	}
+
+	function gappenaltychanged(val){
+		sandbox_options.GAP_PENALTY = val
+		document.getElementById("gappenaltysliderlabel").innerHTML = 'Gap penalty: ' + val
+		document.getElementById('braids-container-sandbox').innerHTML = ''
+		graph_sandbox = new SequenceBraiding(sandbox_data, 'braids-container-sandbox', sandbox_options)
+	}
+
+	function endgappenaltychanged(val){
+		sandbox_options.END_GAP_PENALTY = val
+		document.getElementById("endgappenaltysliderlabel").innerHTML = 'End gap penalty: ' + val
+		document.getElementById('braids-container-sandbox').innerHTML = ''
+		graph_sandbox = new SequenceBraiding(sandbox_data, 'braids-container-sandbox', sandbox_options)
+	}
+
+</script>
+
+<script>
+	content = document.getElementById('dataset-container').textContent
+	parsedjson = JSON.parse(content)
+	content.replace('\t', '')
+
+	options = {
+		minEventPerColThreshold: 1,
+		height: 300,
+	}
+
+	d3.select('#braids-container2')
+            .attr('width', '100%')
+            .attr('height', '300px')
+	newgraph = new SequenceBraiding(parsedjson, 'braids-container2', options)
+
+	document.getElementById('dataset-container').addEventListener('input', function() {
+	    document.getElementById('braids-container2').innerHTML = ''
+		content = document.getElementById('dataset-container').textContent
+		content.replace('\t', '')
+		if (document.getElementById('dataset-container').innerHTML.includes('</code>')) document.getElementById('dataset-container').textContent = document.getElementById('dataset-container').textContent.replace('<code id="dataset-container" contenteditable="true">', '').replace('</code>')
+		parsedjson = JSON.parse(content)
+
+		d3.select('#braids-container2')
+	            .attr('width', '100%')
+	            .attr('height', '300px')
+		newgraph = new SequenceBraiding(parsedjson, 'braids-container2', options)
+	});
+
+</script>
+
+</html>

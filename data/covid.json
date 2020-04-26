@@ -1,0 +1,925 @@
+[
+    [
+        {
+            "seq_name": "Japan",
+            "type": "1/26/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Japan",
+            "type": "2/2/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Japan",
+            "type": "2/9/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Japan",
+            "type": "2/16/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Japan",
+            "type": "2/23/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Japan",
+            "type": "3/1/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "Japan",
+            "type": "3/8/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "Japan",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "China",
+            "type": "1/26/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "China",
+            "type": "2/2/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "China",
+            "type": "2/9/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "China",
+            "type": "2/16/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "China",
+            "type": "2/23/20",
+            "level": "2% to 5%"
+        },
+        {
+            "seq_name": "China",
+            "type": "3/1/20",
+            "level": "2% to 5%"
+        },
+        {
+            "seq_name": "China",
+            "type": "3/8/20",
+            "level": "0% to 2%"
+        },
+        {
+            "seq_name": "China",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Korea, South",
+            "type": "1/26/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Korea, South",
+            "type": "2/2/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Korea, South",
+            "type": "2/9/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Korea, South",
+            "type": "2/16/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Korea, South",
+            "type": "2/23/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Korea, South",
+            "type": "3/1/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Korea, South",
+            "type": "3/8/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Korea, South",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Singapore",
+            "type": "1/26/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Singapore",
+            "type": "2/2/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Singapore",
+            "type": "2/9/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Singapore",
+            "type": "2/16/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Singapore",
+            "type": "2/23/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Singapore",
+            "type": "3/1/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Singapore",
+            "type": "3/8/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "Singapore",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "France",
+            "type": "1/26/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "France",
+            "type": "2/2/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "France",
+            "type": "2/9/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "France",
+            "type": "2/16/20",
+            "level": "5% to 10%"
+        },
+        {
+            "seq_name": "France",
+            "type": "2/23/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "France",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "France",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "France",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Malaysia",
+            "type": "1/26/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Malaysia",
+            "type": "2/2/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "Malaysia",
+            "type": "2/9/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "Malaysia",
+            "type": "2/16/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Malaysia",
+            "type": "2/23/20",
+            "level": "5% to 10%"
+        },
+        {
+            "seq_name": "Malaysia",
+            "type": "3/1/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Malaysia",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Malaysia",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Australia",
+            "type": "1/26/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Australia",
+            "type": "2/2/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "Australia",
+            "type": "2/9/20",
+            "level": "5% to 10%"
+        },
+        {
+            "seq_name": "Australia",
+            "type": "2/16/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Australia",
+            "type": "2/23/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Australia",
+            "type": "3/1/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Australia",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Australia",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Canada",
+            "type": "1/26/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Canada",
+            "type": "2/2/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Canada",
+            "type": "2/9/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Canada",
+            "type": "2/16/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Canada",
+            "type": "2/23/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "Canada",
+            "type": "3/1/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Canada",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Canada",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Germany",
+            "type": "2/2/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Germany",
+            "type": "2/9/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Germany",
+            "type": "2/16/20",
+            "level": "0% to 2%"
+        },
+        {
+            "seq_name": "Germany",
+            "type": "2/23/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Germany",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Germany",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Germany",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Finland",
+            "type": "2/2/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Finland",
+            "type": "2/9/20",
+            "level": "0%"
+        },
+        {
+            "seq_name": "Finland",
+            "type": "2/16/20",
+            "level": "0%"
+        },
+        {
+            "seq_name": "Finland",
+            "type": "2/23/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Finland",
+            "type": "3/1/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Finland",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Finland",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Italy",
+            "type": "2/2/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Italy",
+            "type": "2/9/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Italy",
+            "type": "2/16/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Italy",
+            "type": "2/23/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Italy",
+            "type": "3/1/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Italy",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Italy",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Sweden",
+            "type": "2/2/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Sweden",
+            "type": "2/9/20",
+            "level": "0%"
+        },
+        {
+            "seq_name": "Sweden",
+            "type": "2/16/20",
+            "level": "0%"
+        },
+        {
+            "seq_name": "Sweden",
+            "type": "2/23/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Sweden",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Sweden",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Sweden",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "United Kingdom",
+            "type": "2/2/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "United Kingdom",
+            "type": "2/9/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "United Kingdom",
+            "type": "2/16/20",
+            "level": "2% to 5%"
+        },
+        {
+            "seq_name": "United Kingdom",
+            "type": "2/23/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "United Kingdom",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "United Kingdom",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "United Kingdom",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Spain",
+            "type": "2/2/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Spain",
+            "type": "2/9/20",
+            "level": "50% to 100%"
+        },
+        {
+            "seq_name": "Spain",
+            "type": "2/16/20",
+            "level": "0%"
+        },
+        {
+            "seq_name": "Spain",
+            "type": "2/23/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Spain",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Spain",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Spain",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Belgium",
+            "type": "2/9/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Belgium",
+            "type": "2/16/20",
+            "level": "0%"
+        },
+        {
+            "seq_name": "Belgium",
+            "type": "2/23/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Belgium",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Belgium",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Belgium",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Cruise Ship",
+            "type": "2/9/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Cruise Ship",
+            "type": "2/16/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Cruise Ship",
+            "type": "2/23/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "Cruise Ship",
+            "type": "3/1/20",
+            "level": "0%"
+        },
+        {
+            "seq_name": "Cruise Ship",
+            "type": "3/8/20",
+            "level": "0%"
+        },
+        {
+            "seq_name": "Cruise Ship",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Iran",
+            "type": "2/23/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Iran",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Iran",
+            "type": "3/8/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Iran",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Israel",
+            "type": "2/23/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Israel",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Israel",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Israel",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Bahrain",
+            "type": "3/1/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Bahrain",
+            "type": "3/8/20",
+            "level": "100% to 200%"
+        },
+        {
+            "seq_name": "Bahrain",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "US",
+            "type": "3/1/20",
+            "level": "10% to 50%"
+        },
+        {
+            "seq_name": "US",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "US",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Switzerland",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Switzerland",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Switzerland",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Austria",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Austria",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Austria",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Brazil",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Brazil",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Brazil",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Greece",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Greece",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Greece",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Norway",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Norway",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Norway",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Estonia",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Estonia",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Estonia",
+            "type": "3/15/20",
+            "level": "2% to 5%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Denmark",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Denmark",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Denmark",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Netherlands",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Netherlands",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Netherlands",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Iceland",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Iceland",
+            "type": "3/8/20",
+            "level": "200% to 500%"
+        },
+        {
+            "seq_name": "Iceland",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Qatar",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Qatar",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Qatar",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Czechia",
+            "type": "3/1/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Czechia",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Czechia",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Portugal",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Portugal",
+            "type": "3/15/20",
+            "level": "5% to 10%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Poland",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Poland",
+            "type": "3/15/20",
+            "level": "0% to 2%"
+        }
+    ],
+    [
+        {
+            "seq_name": "Slovenia",
+            "type": "3/8/20",
+            "level": "more than 500%"
+        },
+        {
+            "seq_name": "Slovenia",
+            "type": "3/15/20",
+            "level": "0%"
+        }
+    ]
+]

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Sequence Braiding</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Libs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+</head>
+<body>
+
+</body>
+<script src='../lib/align_pair_quad.js'></script>
+<script src='../lib/pairwise_alignment_dna.js'></script>
+<script src='../js/util.js'></script>
+<script src='../js/SequenceBraiding.js'></script>
+
+<script type="text/javascript">
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+  graph1_options = {
+    numSequences: 100,
+    minEventPerColThreshold: 1,
+    height: 500,
+    width: window.innerWidth,
+    forceLevelName: true,
+    //fontSize: '3em',
+    path: ['source', '1980', '1984', '1988', '1992', '1996', '2000', '2004', '2008', '2012', '2016', 'sink'],
+    levels: [0, 1, 2, 3, '4 to 9', '10 to 20', '20 to 40', 'more than 40'].reverse(),
+    show_seq_names: true,
+    colorscheme: ['#AAE4F9', '#83CDF0', '#1577A6', '#efca08', '#f49f0a', '#ff5c00'].reverse(),
+    catmullromvalue: 0.9,
+    //colorbysequence: true,
+    node_width_factor: 0.05,
+    link_stroke_width: 4,
+    vertical_spacing: 10,
+    horizontal_spacing: 170,
+    padding: {top: 100, left: 40},
+    path_text_y: 60
+  }
+
+  highlight_by_seq_num = function(cursvg, seq_nums, delay=0){
+    cursvg.selectAll('.seqpath').transition()
+      .duration(100)
+      .style('opacity', 0.1)
+
+    for (let seq_n of seq_nums){
+      cursvg.select('#day_' + seq_n)
+        .transition()
+        .duration(110)
+        .style('opacity', 1)
+    }
+  }
+
+  sports = ["Fencing", "Swimming", "Gymnastics", "Sailing", "Rowing"]
+
+  for (i in sports){
+    let sport = sports[i]
+    setTimeout(function(){
+      //   d3.json('../data/olympics/' + sport + '.json', (error, data) => {
+      //   //shuffleArray(data)
+      //   svg = d3.select('body').append('svg').attr('id', sport+'-id').attr('transform', 'translate(20, '+sports.indexOf(sport)*50+')')
+      //   graph_sandbox = new SequenceBraiding(data, sport+'-id', graph1_options)
+      //
+      //   seq_n = data.indexOf(data.find(d => d[0]['seq_name'] == "United States"))
+      //   highlight_by_seq_num([seq_n], 500)
+      // })
+      d3.json('../data/olympics/' + sport + '.json')
+        .then(data => {
+            svg = d3.select('body').append('svg').attr('id', sport+'-id').attr('transform', 'translate(20, '+sports.indexOf(sport)*50+')')
+            svg.append('text')
+              .attr('y', 30)
+              .text(sport)
+            let graph_sandbox = new SequenceBraiding(data, sport+'-id', graph1_options)
+
+            setTimeout(() => {
+              let seq_n = data.indexOf(data.find(d => d[0]['seq_name'] == "United States"))
+              highlight_by_seq_num(svg, [seq_n], 0)
+            }, 0)
+
+        })
+    },
+    sports.indexOf(sport)*500);
+
+
+  }
+
+</script>
+</html>

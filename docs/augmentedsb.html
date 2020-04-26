@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Sequence Braiding</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Libs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+</head>
+<body>
+
+  <div style='font-size: small; color: gray; text-align: center; padding-top: 50px; padding-bottom: 20px'>click on a path to select  -  ctrl+click to add a path to selection  -  brush on a group of nodes to select multiple sequences</div>
+  <svg id='chess-svg' style='margin-left: 5%'></svg>
+
+
+</body>
+<script src='../lib/align_pair_quad.js'></script>
+<script src='../lib/pairwise_alignment_dna.js'></script>
+<script src='../js/util.js'></script>
+<script src='../js/SequenceBraiding.js'></script>
+<script type="text/javascript">
+  graph1_options = {
+    numSequences: 10,
+    minEventPerColThreshold: 1,
+    height: 1000,
+    width: window.innerWidth*0.7,
+    forceLevelName: true,
+    node_width_factor: 0.08,
+    svg_width: window.innerWidth*0.95,
+    //horizontal_spacing: 180,
+    //guidelines: false,
+    //path: ['source', '1', '3', '5', '7', '9', '11', '13', '15', '17', 'sink']
+    levels: ['very_high', 'high', 'normal', 'low', 'very_low'],
+  }
+
+  d3.json('../data/jsonglucose.json', (error, data) => {
+
+    //data.splice(0, 0)
+    //data = data.splice(5)
+    data = data.filter(d => d.length > 1)
+
+    isinselection = function(d, s){
+      return d.y * gs.vertical_spacing + gs.opt.padding.top < s[1][1]
+        && d.y * gs.vertical_spacing + gs.opt.padding.top > s[0][1]
+        && d.depth * gs.horizontal_spacing - gs.horizontal_spacing*.25 > s[0][0]
+        && d.depth * gs.horizontal_spacing - gs.horizontal_spacing*.25 < s[1][0]
+        && !d.isanchor
+    }
+
+    // brush
+    brushmove = function(){
+      if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return;
+      var s = d3.event.selection;
+      //d3.selectAll('.seqnode').filter(d => !d.fake_in && !d.fake_out && !d.isanchor && !isinselection(d, s)).attr('fill', d => d.color)
+      //d3.selectAll('.seqnode').filter(d => isinselection(d, s)).attr('fill', 'red')
+    }
+
+    brushend = function(){
+      if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return;
+      var s = d3.event.selection;
+      selection = []
+      d3.selectAll('.seqnode')
+        .filter(d => !d.fake_in && !d.fake_out && !d.isanchor && isinselection(d, s) && selection.indexOf(d.seq_index) == -1)
+        .each(d => selection.push(d.seq_index))
+      update_selection()
+    }
+
+    d3.select('#chess-svg')
+      .attr('width', graph1_options.width)
+      .attr('height', graph1_options.height)
+      .append("g")
+      .attr("class", "brush")
+      .call(d3.brush().on("brush", brushmove).on("end", brushend));
+
+
+    gs = new SequenceBraiding(data, 'chess-svg', graph1_options)
+
+    svg = gs.svg
+    row_height = 20
+    selection = []
+
+    d3.json('../data/seq_info.json', (error, data) => {
+      data = data.filter(d => gs.data.map(a => a[0].seq_index).indexOf(d.seq_index) != -1)
+
+      // selection management
+      sortbyselection = function(a, b){
+        return selection.indexOf(a.seq_index) == -1
+      }
+
+      apply_reordering = function(){
+        d3.selectAll('.detailg')
+          .transition()
+          .duration(400)
+          .attr('transform', (d)  => 'translate(' + (graph1_options.width + 30) + ',' + (data.indexOf(d) * row_height + gs.opt.padding.top) +')')
+
+        for (item of data){
+          node_col = gs.nodes.filter(n => n.seq_index == item.seq_index && !n.fake_out)
+          last_node = node_col[node_col.length - 1]
+          pathpad = (gs.path.length - last_node.depth - 2) * gs.horizontal_spacing + gs.opt.padding.left - gs.node_width * 1.5 + gs.horizontal_spacing/2
+
+          d3.select('#connector_' + item['seq_index'])
+            .transition()
+            .duration(400)
+            .attr('d', line([
+              {x: graph1_options.width - 40 - pathpad, y: last_node.y * gs.vertical_spacing + gs.opt.padding.top},
+              {x: graph1_options.width - 38 - pathpad, y: last_node.y * gs.vertical_spacing + gs.opt.padding.top},
+              {x: graph1_options.width + 28, y: data.indexOf(item) * row_height + gs.opt.padding.top - 4},
+              {x: graph1_options.width + 30, y: data.indexOf(item) * row_height + gs.opt.padding.top - 4}]))
+        }
+      }
+
+      update_selection = function(){
+        data = data.sort((a, b) => sortbyselection(a, b))
+        apply_reordering()
+        d3.selectAll('.connectorpath').filter(d => selection.indexOf(d.seq_index) != -1).style('display', 'block')
+        d3.selectAll('.connectorpath').filter(d => selection.indexOf(d.seq_index) == -1).style('display', 'none')
+        d3.selectAll('.detailg').filter(d => selection.indexOf(d.seq_index) != -1).style('display', 'block')
+        d3.selectAll('.detailg').filter(d => selection.indexOf(d.seq_index) == -1).style('display', 'none')
+        highlight_by_seq_num(selection, 401)
+      }
+
+      d3.selectAll('.seqpath')
+        .on('click', (d) => {
+          if (d3.event.ctrlKey){ // ctrlclick adds node to selection
+            if (selection.indexOf(d.seq_index) == -1)
+              selection.push(d.seq_index)
+          } else { // single click selects single seq and empties selection
+            selection = [d.seq_index]
+          }
+          update_selection()
+        })
+
+      sortbylastnode = function(a, b){
+        node_col_a = gs.nodes.filter(n => n.seq_index == a.seq_index && !n.fake_out)
+        last_node_a = node_col_a[node_col_a.length - 1]
+        node_col_b = gs.nodes.filter(n => n.seq_index == b.seq_index && !n.fake_out)
+        last_node_b = node_col_b[node_col_b.length - 1]
+        if (last_node_a.y == last_node_b.y) return last_node_a.depth > last_node_b.depth ? 1 : -1
+        return last_node_a.y > last_node_b.y ? 1 : -1
+      }
+
+      highlight_by_seq_num = function(seq_nums, delay=0){
+        d3.selectAll('.detailg').transition()
+          .delay(delay)
+          .duration(100)
+          .attr('opacity', 0.3)
+        d3.selectAll('.seqpath').transition()
+          //.delay(delay)
+          .duration(100)
+          .style('opacity', 0.3)
+
+        for (seq_n of seq_nums){
+          d3.select('#detailg' + seq_n)
+            .transition()
+            .delay(delay)
+            .duration(110)
+            .attr('opacity', 1)
+          d3.select('#day_' + seq_n)
+            .transition()
+            //.delay(0)
+            .duration(110)
+            .style('opacity', 1)
+        }
+      }
+
+      data = data.sort((a, b) => sortbylastnode(a, b))
+      for (i in data){
+        g = svg.append('g')
+          .datum(data[i])
+          .attr('transform', 'translate(' + (graph1_options.width + 30) + ',' + (i * row_height + gs.opt.padding.top) +')')
+          .attr('class', 'detailg')
+          .attr('id', 'detailg' + data[i]['seq_index'])
+          .on('mouseover', (d) => highlight_by_seq_num([d.seq_index]))
+          .on('mouseout', () => {
+            d3.selectAll('.detailg')
+              .transition()
+              .duration(100)
+              .attr('opacity', 1)
+            d3.selectAll('path')
+              .transition()
+              .duration(100)
+              .style('opacity', 1)
+          })
+
+        // connector
+        g.append('circle')
+          .attr('cx', 0)
+          .attr('cy', -4)
+          .attr('r', row_height/6)
+          .attr('fill', 'gray')
+
+        node_col = gs.nodes.filter(n => n.seq_index == data[i].seq_index && !n.fake_out)
+        last_node = node_col[node_col.length - 1]
+
+        var line = d3.line()
+          .x(function(d, i) { return d.x })
+          .y(function(d) { return d.y })
+          .curve(d3.curveCatmullRom.alpha(1))
+
+        pathpad = (gs.path.length - last_node.depth - 2) * gs.horizontal_spacing + gs.opt.padding.left - gs.node_width * 1.5 + gs.horizontal_spacing/2 - 100
+
+        svg.append('path')
+          .datum({'seq_index' : data[i]['seq_index']})
+          .attr('id', 'connector_' + data[i]['seq_index'])
+          .attr('class', 'connectorpath')
+          .attr('stroke', 'gray')
+          .attr('fill', 'none')
+          .attr('opacity', 0.5)
+          .attr('d', line([
+            {x: graph1_options.width - 40 - pathpad, y: last_node.y * gs.vertical_spacing + gs.opt.padding.top},
+            {x: graph1_options.width - 38 - pathpad, y: last_node.y * gs.vertical_spacing + gs.opt.padding.top},
+            {x: graph1_options.width + 28, y: i * row_height + gs.opt.padding.top - 4},
+            {x: graph1_options.width + 30, y: i * row_height + gs.opt.padding.top - 4}]))
+
+        // date
+        pad = function (num) { return ("0"+num).slice(-2);}
+        day = new Date(data[i].date)
+
+        g.append('text')
+          .attr('font-size', '0.7em')
+          .attr('transform', 'translate('+ 10 +',0)')
+          .text(day.getFullYear() + '.' + pad(day.getMonth()+1) + '.' + pad(day.getDate()))
+
+        weekday = new Date(data[i].date).getDay()
+        switch (weekday) {
+          case 0: weekday = 'U'; break;
+          case 1: weekday = 'M'; break;
+          case 2: weekday = 'T'; break;
+          case 3: weekday = 'W'; break;
+          case 4: weekday = 'R'; break;
+          case 5: weekday = 'F'; break;
+          case 6: weekday = 'S'; break;
+          default: weekday = 'Error'
+        }
+
+        g.append('text')
+          .attr('font-size', '0.7em')
+          .attr('transform', 'translate('+ 70 +',0)')
+          .text(weekday)
+
+        // carbs
+        carbs_chart = g.append('g').attr('transform', 'translate('+ 85 +',0)')
+
+        carbs_chart.selectAll('rect')
+          .data(data[i].carbs)
+          .enter()
+          .append('rect')
+          .attr('x', (d, i) => i*5)
+          .attr('y', d => - d/10)
+          .attr('width', 4)
+          .attr('height', d => d/10)
+          .attr('fill', '#029DAF')
+
+        // time ratio
+        time_ratio_chart = g.append('g').attr('transform', 'translate('+ 150 +',0)')
+        width_factor = 60
+        minipadding = 0.03
+        height_factor = 0.7
+        levels = gs.opt.levels
+
+        for (l in levels){
+          llev = levels.slice(0, l)
+          prevsum = 0
+          for (ll of llev) prevsum += data[i]['time_ratio'][ll] + minipadding
+          lw = Math.max(data[i]['time_ratio'][levels[l]], 0.009)
+
+          time_ratio_chart.append('rect')
+            .attr('width', lw*width_factor)
+            .attr('height', row_height*height_factor)
+            .attr('fill', gs.opt.colorscheme[l])
+            .attr('transform', 'translate('+((prevsum)*width_factor)+','+ -row_height/2 +')')
+        }
+      }
+
+      // sortbutton
+      sortedbydate = false
+      symbolgenerator = d3.symbol().size(100)
+      buttong = svg.append('g').attr('transform', 'translate(' + gs.opt.width + ', 10)')
+      buttong.append('path')
+        .attr("id", "sorttriangle")
+        .attr("d", symbolgenerator.type(d3.symbolTriangle))
+        .attr('transform', 'translate(60, 0)')
+        .attr('fill', 'gray')
+        .on('click', () => {
+          sortedbydate = !sortedbydate
+          if (sortedbydate) data = data.sort((a, b) => new Date(a.date) > new Date(b.date) ? 1 : -1)
+          else data = data.sort((a, b) => sortbylastnode(a, b))
+          apply_reordering()
+
+          d3.select("#sorttriangle")
+            .transition()
+            .duration(500)
+            .attr('transform', () => {
+              if (sortedbydate) return 'translate(60, 0)rotate(180)'
+              else return 'translate(60, 0)rotate(0)'
+              })
+        })
+    })
+
+    // for (detail of details){
+    //   svg.append('text')
+    //     .attr('x', window.innerWidth*0.6)
+    //     .attr('y', 100)
+    //     .attr('font-size', 'small')
+    //     .attr('transform', 'rotate(10)')
+    //     .text(detail)
+    // }
+})
+</script>
+</html>
