@@ -335,14 +335,14 @@ window.SequenceBraiding = class SequenceBraiding {
 	apply_ord(ord, grid, index_dict, date_dict){
 		for (var i in grid){
 			if (ord[i] == undefined) continue
-			grid[i] = grid[i].sort((a, b) => ord[i].indexOf(date_dict[a.seq_index]) > ord[i].indexOf(date_dict[b.seq_index]))
+			grid[i] = grid[i].sort((a, b) => ord[i].indexOf(date_dict[a.seq_index]) > ord[i].indexOf(date_dict[b.seq_index]) ? 1 : -1)
 		}
 	}
 
 	apply_ord_for_ilp(ord, grid, index_dict, date_dict){
 		for (var i in grid){
 			if (ord[i-1] == undefined) continue
-			grid[i] = grid[i].sort((a, b) => ord[i-1].indexOf(date_dict[a.seq_index]) > ord[i-1].indexOf(date_dict[b.seq_index]))
+			grid[i] = grid[i].sort((a, b) => ord[i-1].indexOf(date_dict[a.seq_index]) > ord[i-1].indexOf(date_dict[b.seq_index]) ? 1 : -1)
 		}
 	}
 
